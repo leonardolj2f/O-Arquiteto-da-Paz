@@ -4,13 +4,13 @@ using UnityEngine;
 public class FlagManager : MonoBehaviour
 {
     public GameObject flagPrefab; // Prefab da bandeira
-    public Vector2[] positions; // Posições onde as bandeiras vão aparecer
+    public Vector3[] positions; // Posições onde as bandeiras vão aparecer
     public float fadeDuration = 1.0f; // Duração do fade in/out
     public float displayTime = 2.0f; // Tempo que a bandeira ficará visível
 
     void Start()
     {
-        foreach (Vector2 pos in positions)
+        foreach (Vector3 pos in positions)
         {
             GameObject flag = Instantiate(flagPrefab, pos, Quaternion.identity);
             StartCoroutine(FadeFlag(flag));
