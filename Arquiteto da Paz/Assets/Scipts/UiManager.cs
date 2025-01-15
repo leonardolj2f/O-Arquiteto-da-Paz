@@ -26,6 +26,7 @@ public class UiManager : MonoBehaviour
     public GameObject joining;
 
     public GameObject trading;
+    public GameObject endgame;
     public Slider sliderOuro;
     public Slider sliderCarvao;
     public Slider sliderPetroleo;
@@ -48,7 +49,9 @@ public class UiManager : MonoBehaviour
     public GameObject exp7;
     public GameObject exp8;
 
-    
+    private float timer = 0;
+    private bool gameOver = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,7 +62,15 @@ public class UiManager : MonoBehaviour
     void Update()
     {
         dayText.text = "Day " + gameInitializer.day;
-        
+        if(gameInitializer.isChoosing){
+            timer += Time.deltaTime;
+        }
+        else {
+            timer = 0.0f;
+        }
+        if(timer>15.0f && !gameOver){
+            gameInitializer.isChoosing=false;
+        }
     }
 
     // Sets the hover text to display
@@ -240,6 +251,26 @@ public class UiManager : MonoBehaviour
             sliderMadeira.value = gameInitializer.union.GetReservaMadeira()*gameInitializer.union.GetMadeira().baseImportance/1000;
         }
         
+    }
+
+    public void GameOver(int i){
+        gameOver=true;
+        gameInitializer.p1.gameObject.SetActive(false);
+        gameInitializer.p2.gameObject.SetActive(false);
+        gameInitializer.p3.gameObject.SetActive(false);
+        gameInitializer.p4.gameObject.SetActive(false);
+        gameInitializer.p5.gameObject.SetActive(false);
+        gameInitializer.p6.gameObject.SetActive(false);
+        gameInitializer.p7.gameObject.SetActive(false);
+        gameInitializer.p8.gameObject.SetActive(false);
+        if(i==0){
+            endgame.SetActive(true);
+            endgame.GetComponentInChildren<TMP_Text>().text = "O jogo chegou ao fim! Foste capaz de alcançar a Paz Mundial ao juntar todos os Países na União! Clica em Continuar para voltar ao Menu Inicial.";
+        }
+        else if(i==1){
+            endgame.SetActive(true);
+            endgame.GetComponentInChildren<TMP_Text>().text = "O jogo chegou ao fim! As tuas decisões levaram ao abandono de todos os países e ao fim da União! Clica em Continuar para voltar ao Menu Inicial e tentar novamente.";
+        }
     }
 
     public void PlayMatsAnims(){

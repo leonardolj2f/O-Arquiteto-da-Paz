@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameInitializer : MonoBehaviour
 {
@@ -125,6 +126,17 @@ public class GameInitializer : MonoBehaviour
                     }
                 }
             }
+            foreach(Pais p in inimigos){
+                foreach( Pais i in union.paises){
+                    p.respeito += CalcRespeitoAlterado(i)/2;
+                }
+            }
+        }
+        if (inimigos.Count==0){
+            uiManager.GameOver(0);
+        }
+        if (union.paises.Count==0){
+            uiManager.GameOver(1);
         }
     }
 
@@ -132,6 +144,9 @@ public class GameInitializer : MonoBehaviour
         int x = UnityEngine.Random.Range(0,inimigos.Count);
         if (union.paises.Count == 0){
             Debug.Log("Oi");
+            if(inimigos[x].respeito<50){
+                inimigos[x].respeito = 55;
+            }
             union.paises.Add(inimigos[x]);
             inimigos.RemoveAt(x);
         }
@@ -227,7 +242,7 @@ public class GameInitializer : MonoBehaviour
             flagManager.PlayAnims(greens, reds);
             greens.Clear();
             Debug.Log("Respeito: " + respeitoAlterado);
-            uiManager.CountryDecision(currentCountry.nome,1);
+            uiManager.CountryDecision(currentCountry.nome,0);
         }
         // action == 1 é quando um país se quer juntar à união e é recusado
         else if(action==1){
@@ -237,7 +252,7 @@ public class GameInitializer : MonoBehaviour
                 pais.respeito -= respeitoAlterado;
             }
             Debug.Log("Respeito: " + respeitoAlterado);
-            uiManager.CountryDecision(currentCountry.nome,0);
+            uiManager.CountryDecision(currentCountry.nome,1);
         }
         // action == 2 é quando um país quer sair
         else if(action==2){
@@ -256,7 +271,7 @@ public class GameInitializer : MonoBehaviour
         // action == 3 é quando um país é convidado
         else if(action==3){
             int respeitoAlterado = CalcRespeitoAlterado(p);
-            if(p.respeito>60){
+            if(p.respeito>50){
                 foreach(Pais pais in union.paises.ToList()){
                     pais.respeito += respeitoAlterado;
                 }
@@ -480,7 +495,7 @@ public class GameInitializer : MonoBehaviour
     }
     
 
-
+    
     public void Give(){
         UpdateRespeito(currentCountry, 4,attackedCountry,wantedMaterial);
     }
@@ -552,5 +567,10 @@ public class GameInitializer : MonoBehaviour
             reds.Add(item: 7);
             p.ChangeOgColor(1);
         }
+    }
+
+    public void End(){
+        uiManager.endgame.SetActive(false);
+        SceneManager.LoadScene(1);
     }
 }
