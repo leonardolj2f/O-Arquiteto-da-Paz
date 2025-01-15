@@ -571,6 +571,6 @@ public class GameInitializer : MonoBehaviour
 
     public void End(){
         uiManager.endgame.SetActive(false);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 }
