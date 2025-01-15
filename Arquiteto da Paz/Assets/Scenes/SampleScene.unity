@@ -2914,7 +2914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   redFlagPrefab: {fileID: 3436248565059209736, guid: e96e1fed5e7d5d140a6b371c657f4c0f, type: 3}
-  greenFlagPrefab: {fileID: 0}
+  greenFlagPrefab: {fileID: 5168891658932014425, guid: 794979a88a0f39245b33264038a7e956, type: 3}
   positions:
   - {x: -5.99, y: 1.07, z: -1.204}
   - {x: -1.97, y: 1.28, z: -1.204}
