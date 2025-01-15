@@ -10,9 +10,11 @@ public class FlagManager : MonoBehaviour
     public float fadeDuration = 1.0f; // Dura��o do fade in/out
     public float displayTime = 2.0f; // Tempo que a bandeira ficar� vis�vel
 
+    GameInitializer gameInitializer;
+
     void Start()
     {
-        
+        gameInitializer = GetComponent<GameInitializer>();
     }
 
     public void PlayAnims(List<int> greens, List<int> reds){
@@ -56,6 +58,14 @@ public class FlagManager : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+        gameInitializer.p1.UpdateColor();
+        gameInitializer.p2.UpdateColor();
+        gameInitializer.p3.UpdateColor();
+        gameInitializer.p4.UpdateColor();
+        gameInitializer.p5.UpdateColor();
+        gameInitializer.p6.UpdateColor();
+        gameInitializer.p7.UpdateColor();
+        gameInitializer.p8.UpdateColor();
 
         spriteRenderer.color = new Color(1, 1, 1, 0); // Garante que fique totalmente transparente
     }
