@@ -1,18 +1,30 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FlagManager : MonoBehaviour
 {
-    public GameObject flagPrefab; // Prefab da bandeira
-    public Vector3[] positions; // Posições onde as bandeiras vão aparecer
-    public float fadeDuration = 1.0f; // Duração do fade in/out
-    public float displayTime = 2.0f; // Tempo que a bandeira ficará visível
+    public GameObject redFlagPrefab; // Prefab da bandeira
+    public GameObject greenFlagPrefab; // Prefab da bandeira
+    public Vector3[] positions; // Posiï¿½ï¿½es onde as bandeiras vï¿½o aparecer
+    public float fadeDuration = 1.0f; // Duraï¿½ï¿½o do fade in/out
+    public float displayTime = 2.0f; // Tempo que a bandeira ficarï¿½ visï¿½vel
 
     void Start()
     {
-        foreach (Vector3 pos in positions)
+        
+    }
+
+    public void PlayAnims(List<int> greens, List<int> reds){
+
+        foreach (int p in reds)
         {
-            GameObject flag = Instantiate(flagPrefab, pos, Quaternion.identity);
+            GameObject flag = Instantiate(redFlagPrefab, positions[p], Quaternion.identity);
+            StartCoroutine(FadeFlag(flag));
+        }
+        foreach (int p in greens)
+        {
+            GameObject flag = Instantiate(greenFlagPrefab, positions[p], Quaternion.identity);
             StartCoroutine(FadeFlag(flag));
         }
     }
@@ -30,7 +42,7 @@ public class FlagManager : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        spriteRenderer.color = new Color(1, 1, 1, 1); // Garante que fique totalmente visível
+        spriteRenderer.color = new Color(1, 1, 1, 1); // Garante que fique totalmente visï¿½vel
 
         // Espera antes do fade out
         yield return new WaitForSeconds(displayTime);
