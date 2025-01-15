@@ -17,6 +17,8 @@ public class Uniao : MonoBehaviour
     private int reservaPetroleo;
     private int reservaMadeira;
 
+    public UiManager uiManager;
+
     //ouro=11
     //carvao=12
     //petroleo=13
@@ -74,6 +76,22 @@ public class Uniao : MonoBehaviour
         return madeira;
     }
 
+    public int GetReservaOuro(){
+        return reservaOuro;
+    }
+
+    public int GetReservaCarvao(){
+        return reservaCarvao;
+    }
+
+    public int GetReservaPetroleo(){
+        return reservaPetroleo;
+    }
+
+    public int GetReservaMadeira(){
+        return reservaMadeira;
+    }
+
     public void UpdateMaterialImportance(){
         float totalImportance = reservaOuro*ouro.baseImportance + reservaCarvao*carvao.baseImportance + reservaPetroleo*petroleo.baseImportance + reservaMadeira*madeira.baseImportance;
         ouro.normalizedImportance = Mathf.Abs(reservaOuro*ouro.baseImportance/totalImportance);
@@ -102,6 +120,11 @@ public class Uniao : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void OnMouseDown(){
+        uiManager.ClearHoverText();
+        uiManager.button.gameObject.SetActive(false);
     }
 }
 

@@ -28,9 +28,11 @@ public class Pais : MonoBehaviour
     private int madeiraPinicial;
     public int madeiraG;
 
-    private Renderer objectRenderer;
-    private Color originalColor;
-    public Color hoverColor = Color.green;
+    public Renderer objectRenderer;
+    public Color originalColor;
+    private Color hoverColor;
+
+    public UiManager uiManager;
 
     void UpdateCountry(){
         if(defesas<defesasInicias){
@@ -73,36 +75,75 @@ public class Pais : MonoBehaviour
 
     public List<Pais> vizinhos = new();
 
+
     // Start is called before the first frame update
     void Start()
     {
+        hoverColor = Color.yellow;
         defesasInicias=defesas;
         objectRenderer = GetComponent<Renderer>();
         if (objectRenderer != null)
         {
             originalColor = objectRenderer.material.color;
         }
+        respeito = UnityEngine.Random.Range(35,62);
+        madeiraP = (int)Math.Round(UnityEngine.Random.Range(0,8)/0.00001f);
+        madeiraG = (int)Math.Round(UnityEngine.Random.Range(0,5)/0.00001f);
+        madeiraPinicial = madeiraP;
+        carvaoP = (int)Math.Round(UnityEngine.Random.Range(0,8)/0.0001f);
+        carvaoG = (int)Math.Round(UnityEngine.Random.Range(0,5)/0.0001f);
+        carvaoPinicial = carvaoP;
+        petroleoP = (int)Math.Round(UnityEngine.Random.Range(0,8)/0.001f);
+        petroleoG = (int)Math.Round(UnityEngine.Random.Range(0,5)/0.001f);
+        petroleoPinicial = petroleoP;
+        ouroP = UnityEngine.Random.Range(0,8)/1;
+        ouroG = UnityEngine.Random.Range(0,5)/1;
+        ouroPinicial = ouroP;
+        defesas = (int)Math.Round(UnityEngine.Random.Range(2,8)/0.001f);
+        defesasInicias = defesas;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        UpdateCountry();
     }
 
-    void OnMouseEnter()
+    void OnMouseDown()
     {
+        
         if (objectRenderer != null)
         {
-            objectRenderer.material.color = hoverColor;
+            if(uiManager.SetHoverText(this)){
+                objectRenderer.material.color = hoverColor;
+            }
         }
     }
 
-    void OnMouseExit()
-    {
-        if (objectRenderer != null)
-        {
-            objectRenderer.material.color = originalColor;
+    public void ChangeOgColor(int c){
+        if(c==0){
+            originalColor = new Color(Color.green.r, Color.green.g, Color.green.b, 0.25f);
+        }
+        else if(c==1){
+            originalColor = new Color(Color.red.r, Color.red.g, Color.red.b, 0.25f);
         }
     }
+
+    public void UpdateColor(){
+        objectRenderer.material.color = originalColor;
+    }
+
+    // public void ClearColor(){
+    //     objectRenderer.material.color = originalColor;
+    // }
+
+    // void OnMouseUp()
+    // {
+    //     if (objectRenderer != null)
+    //     {
+    //         objectRenderer.material.color = originalColor;
+    //         uiManager.ClearHoverText();
+    //     }
+    // }
 }
