@@ -33,6 +33,7 @@ public class Pais : MonoBehaviour
     private Color hoverColor;
 
     public UiManager uiManager;
+    public AudioSource audioSource;
 
     void UpdateCountry(){
         if(defesas<defesasInicias){
@@ -117,6 +118,8 @@ public class Pais : MonoBehaviour
         {
             if(uiManager.SetHoverText(this)){
                 objectRenderer.material.color = hoverColor;
+                audioSource.Play();
+
             }
         }
     }
