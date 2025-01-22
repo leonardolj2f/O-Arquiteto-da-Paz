@@ -179,10 +179,11 @@ public class GameInitializer : MonoBehaviour
             }
         }
         if(prob > 80){
-            isChoosing = true;
+            
             int x = UnityEngine.Random.Range(0,inimigos.Count);
             if(inimigos[x].respeito<30){
                 //Pais inimigo vai atacar
+                isChoosing = true;
                 List<Pais> targets = new();
                 foreach(Pais p in union.paises.ToList()){
                     foreach(Pais v in p.vizinhos.ToList()){
@@ -218,6 +219,7 @@ public class GameInitializer : MonoBehaviour
                 }
             }
             else if(inimigos[x].respeito>75){
+                isChoosing = true;
                 //Pais inimigo vai pedir para se juntar
                 Debug.Log("País "+ inimigos[x] + " quer juntar-se à união. O que vai fazer?");
                 currentCountry = inimigos[x];

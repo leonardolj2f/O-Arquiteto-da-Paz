@@ -38,7 +38,7 @@ public class Inicio : MonoBehaviour
             mats.SetActive(true);
         }
         else if(i == 3){
-            text.text = "Vais ver decisões a tomar no canto inferior direito. Agora que sabes tudo o necessário, podemos continuar!";
+            text.text = "Vais ver decisões a tomar no centro do ecrã. Agora que sabes tudo o necessário, podemos continuar!";
             mats.SetActive(false);
             choices.SetActive(true);
         }

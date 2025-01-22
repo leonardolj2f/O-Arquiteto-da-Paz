@@ -49,9 +49,6 @@ public class UiManager : MonoBehaviour
     public GameObject exp7;
     public GameObject exp8;
 
-    private float timer = 0;
-    private bool gameOver = false;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -62,15 +59,6 @@ public class UiManager : MonoBehaviour
     void Update()
     {
         dayText.text = "Day " + gameInitializer.day;
-        if(gameInitializer.isChoosing){
-            timer += Time.deltaTime;
-        }
-        else {
-            timer = 0.0f;
-        }
-        if(timer>15.0f && !gameOver){
-            gameInitializer.isChoosing=false;
-        }
     }
 
     // Sets the hover text to display
@@ -78,14 +66,14 @@ public class UiManager : MonoBehaviour
     {
         if(!gameInitializer.isChoosing){
             gameInitializer.currentCountry = country;
-            gameInitializer.p1.objectRenderer.material.color = gameInitializer.p1.originalColor;
-            gameInitializer.p2.objectRenderer.material.color = gameInitializer.p2.originalColor;
-            gameInitializer.p3.objectRenderer.material.color = gameInitializer.p3.originalColor;
-            gameInitializer.p4.objectRenderer.material.color = gameInitializer.p4.originalColor;
-            gameInitializer.p5.objectRenderer.material.color = gameInitializer.p5.originalColor;
-            gameInitializer.p6.objectRenderer.material.color = gameInitializer.p6.originalColor;
-            gameInitializer.p7.objectRenderer.material.color = gameInitializer.p7.originalColor;
-            gameInitializer.p8.objectRenderer.material.color = gameInitializer.p8.originalColor;
+            gameInitializer.p1.UpdateColor();
+            gameInitializer.p2.UpdateColor();
+            gameInitializer.p3.UpdateColor();
+            gameInitializer.p4.UpdateColor();
+            gameInitializer.p5.UpdateColor();
+            gameInitializer.p6.UpdateColor();
+            gameInitializer.p7.UpdateColor();
+            gameInitializer.p8.UpdateColor();
             if (paisToShow != null)
             {
                 foreach(Pais p in gameInitializer.inimigos){
@@ -112,6 +100,15 @@ public class UiManager : MonoBehaviour
         {
             paisToShow.text = "";
             paisToShow.gameObject.SetActive(false); // Hide the text
+            gameInitializer.p1.UpdateColor();
+            gameInitializer.p2.UpdateColor();
+            gameInitializer.p3.UpdateColor();
+            gameInitializer.p4.UpdateColor();
+            gameInitializer.p5.UpdateColor();
+            gameInitializer.p6.UpdateColor();
+            gameInitializer.p7.UpdateColor();
+            gameInitializer.p8.UpdateColor();
+            
         }
     }
 
@@ -254,7 +251,6 @@ public class UiManager : MonoBehaviour
     }
 
     public void GameOver(int i){
-        gameOver=true;
         gameInitializer.p1.gameObject.SetActive(false);
         gameInitializer.p2.gameObject.SetActive(false);
         gameInitializer.p3.gameObject.SetActive(false);

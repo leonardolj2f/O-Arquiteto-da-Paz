@@ -126,10 +126,10 @@ public class Pais : MonoBehaviour
 
     public void ChangeOgColor(int c){
         if(c==0){
-            originalColor = new Color(Color.green.r, Color.green.g, Color.green.b, 0.25f);
+            originalColor = new Color(Color.green.r, Color.green.g, Color.green.b, 0.5f);
         }
         else if(c==1){
-            originalColor = new Color(Color.red.r, Color.red.g, Color.red.b, 0.25f);
+            originalColor = new Color(Color.red.r, Color.red.g, Color.red.b, 0.5f);
         }
     }
 
