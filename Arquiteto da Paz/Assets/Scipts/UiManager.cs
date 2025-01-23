@@ -118,6 +118,7 @@ public class UiManager : MonoBehaviour
     }
     public void HideConfirm(){
         confirm.SetActive(false);
+        gameInitializer.isChoosing=false;
     }
 
     public void CountryLeaving(string name){

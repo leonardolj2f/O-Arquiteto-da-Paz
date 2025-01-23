@@ -217,6 +217,9 @@ public class GameInitializer : MonoBehaviour
                     wantedMaterial = mate;
                     //UpdateRespeito(inimigos[x], 6, atacado: targets[target], mat: mate);
                 }
+                else{
+                    isChoosing=false;
+                }
             }
             else if(inimigos[x].respeito>75){
                 isChoosing = true;
